@@ -8,7 +8,7 @@ Adding animated cloud shadows is a quick, easy and effective way to breath extra
 
 ![Cloud Shadows Unity](http://www.entropi-games.com/files/cloud-shadows/ScreenshotTanks.png)
 ![Cloud Shadows Editor](http://www.entropi-games.com/files/cloud-shadows/ScreenshotEditor.png)
-![Cloud Shadows Layers](http://www.entropi-games.com/files/cloud-shadows/ScreenshotLayers.png)
+![Cloud Shadows Layers](https://forum.unity.com/attachments/screenshotlayers-png.203348/)
 ![Cloud Shadows 2D](http://www.entropi-games.com/files/cloud-shadows/Screenshot2D.png)
 
 ## Main Features
