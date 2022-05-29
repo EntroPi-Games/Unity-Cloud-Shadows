@@ -1,4 +1,8 @@
 ﻿using UnityEngine;
+#if UNITY_PIPELINE_URP
+using UnityEngine.Rendering.Universal;
+#endif
+
 
 namespace EntroPi
 {
@@ -186,6 +190,9 @@ namespace EntroPi
         #region Private Data Members
 
         private Light m_Light;
+#if UNITY_PIPELINE_URP
+        private UniversalAdditionalLightData m_UniversalAdditionalLightData;
+#endif
         private Material m_CloudShadowMaterial;
         private RenderTexture m_RenderTexture1;
         private RenderTexture m_RenderTexture2;
@@ -209,6 +216,10 @@ namespace EntroPi
         private void OnEnable()
         {
             m_Light = GetComponent<Light>();
+#if UNITY_PIPELINE_URP
+            m_UniversalAdditionalLightData = GetComponent<UniversalAdditionalLightData>();
+#endif
+
 
             // Verify that this component can be enabled.
             enabled &= Debug.Verify(m_Light.type == LightType.Directional, "Light type needs to be directional");
@@ -389,8 +400,13 @@ namespace EntroPi
         /// </summary>
         private void UpdateLightProperties()
         {
+#if UNITY_PIPELINE_URP
+            m_Light.cookie = m_RenderTexture1;
+            m_UniversalAdditionalLightData.lightCookieSize = new Vector2(m_WorldSize, m_WorldSize);
+#else
             m_Light.cookie = m_RenderTexture1;
             m_Light.cookieSize = m_WorldSize;
+#endif
         }
 
         /// <summary>

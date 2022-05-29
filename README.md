@@ -28,5 +28,6 @@ Adding animated cloud shadows is a quick, easy and effective way to breath extra
 * Mobile
 * Virtual Reality
 
-## NOT Supported
-* Scriptable Render Pipelines (URP, HDRP)
+## Scriptable Render Pipelines
+* URP
+(Make sure to include the Editor folder which adds defines to detect which pipeline is used)
