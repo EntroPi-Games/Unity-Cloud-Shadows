@@ -28,5 +28,8 @@ Adding animated cloud shadows is a quick, easy and effective way to breath extra
 * Mobile
 * Virtual Reality
 
-## NOT Supported
-* Scriptable Render Pipelines (URP, HDRP)
+## Scriptable Render Pipelines
+Make sure to include the Editor folder which adds defines to detect which pipeline is used.
+
+* URP (Tested with Unity 2021.3.2f1, URP 12.1.6)
+* HDRP (Tested with Unity 2021.3.2f1, HDRP 12.1.6)
