@@ -1,4 +1,10 @@
 ﻿using UnityEngine;
+#if UNITY_PIPELINE_URP
+using UnityEngine.Rendering.Universal;
+#elif UNITY_PIPELINE_HDRP
+using UnityEngine.Rendering.HighDefinition;
+#endif
+
 
 namespace EntroPi
 {
@@ -186,6 +192,11 @@ namespace EntroPi
         #region Private Data Members
 
         private Light m_Light;
+#if UNITY_PIPELINE_URP
+        private UniversalAdditionalLightData m_UniversalAdditionalLightData;
+#elif UNITY_PIPELINE_HDRP
+        private HDAdditionalLightData m_HDAdditionalLightData;
+#endif
         private Material m_CloudShadowMaterial;
         private RenderTexture m_RenderTexture1;
         private RenderTexture m_RenderTexture2;
@@ -209,6 +220,12 @@ namespace EntroPi
         private void OnEnable()
         {
             m_Light = GetComponent<Light>();
+#if UNITY_PIPELINE_URP
+            m_UniversalAdditionalLightData = GetComponent<UniversalAdditionalLightData>();
+#elif UNITY_PIPELINE_HDRP
+            m_HDAdditionalLightData = GetComponent<HDAdditionalLightData>();
+#endif
+
 
             // Verify that this component can be enabled.
             enabled &= Debug.Verify(m_Light.type == LightType.Directional, "Light type needs to be directional");
@@ -237,6 +254,16 @@ namespace EntroPi
 
             // Initial Update
             UpdateLightProperties();
+
+#if UNITY_PIPELINE_HDRP
+            // Workaround for a HDRP issue
+            Invoke("ReEnable", 0.1f);
+#endif
+        }
+
+        private void ReEnable() {
+            OnDisable();
+            OnEnable();
         }
 
         private void Update()
@@ -389,8 +416,15 @@ namespace EntroPi
         /// </summary>
         private void UpdateLightProperties()
         {
+#if UNITY_PIPELINE_URP
+            m_Light.cookie = m_RenderTexture1;
+            m_UniversalAdditionalLightData.lightCookieSize = new Vector2(m_WorldSize, m_WorldSize);
+#elif UNITY_PIPELINE_HDRP
+            m_HDAdditionalLightData.SetCookie(m_RenderTexture1, new Vector2(m_WorldSize, m_WorldSize));
+#else
             m_Light.cookie = m_RenderTexture1;
             m_Light.cookieSize = m_WorldSize;
+#endif
         }
 
         /// <summary>

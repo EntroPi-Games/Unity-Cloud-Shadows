@@ -77,7 +77,7 @@ Shader "Hidden/EntroPi/CloudShadow"
 		fixed4 color = tex2D(_MainTex, i.texcoord);
 		float layerAlpha = CalculateLayerAlpha(i);
 
-		color.a = BlendOpacity(layerAlpha, color.a, BlendSubtract, _LayerOpacity);
+		color.rgba = BlendOpacity(layerAlpha, color.a, BlendSubtract, _LayerOpacity);
 
 		return color;
 	}
@@ -87,7 +87,7 @@ Shader "Hidden/EntroPi/CloudShadow"
 		fixed4 color = tex2D(_MainTex, i.texcoord);
 		float layerAlpha = (1 - CalculateLayerAlpha(i));
 
-		color.a = BlendOpacity(layerAlpha, color.a, BlendMultiply, _LayerOpacity);
+		color.rgba = BlendOpacity(layerAlpha, color.a, BlendMultiply, _LayerOpacity);
 
 		return color;
 	}
@@ -97,7 +97,7 @@ Shader "Hidden/EntroPi/CloudShadow"
 		fixed4 color = tex2D(_MainTex, i.texcoord);
 		float layerAlpha = (1 - CalculateLayerAlpha(i));
 
-		color.a = BlendOpacity(layerAlpha, color.a, BlendColorBurnf, _LayerOpacity);
+		color.rgba = BlendOpacity(layerAlpha, color.a, BlendColorBurnf, _LayerOpacity);
 
 		return color;
 	}
@@ -107,7 +107,7 @@ Shader "Hidden/EntroPi/CloudShadow"
 		fixed4 color = tex2D(_MainTex, i.texcoord);
 		float layerAlpha = (1 - CalculateLayerAlpha(i));
 
-		color.a = BlendOpacity(layerAlpha, color.a, BlendVividLightf, _LayerOpacity);
+		color.rgba = BlendOpacity(layerAlpha, color.a, BlendVividLightf, _LayerOpacity);
 
 		return color;
 	}
@@ -117,7 +117,7 @@ Shader "Hidden/EntroPi/CloudShadow"
 		fixed4 color = tex2D(_MainTex, i.texcoord);
 		float layerAlpha = (1 - CalculateLayerAlpha(i));
 
-		color.a = BlendOpacity(layerAlpha, color.a, BlendPinLightf, _LayerOpacity);
+		color.rgba = BlendOpacity(layerAlpha, color.a, BlendPinLightf, _LayerOpacity);
 
 		return color;
 	}
